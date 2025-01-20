@@ -1,1 +1,3 @@
-# tic_tac_toe
+# tic tac toe
+
+A simple tic-tac-toe game in Rust.
