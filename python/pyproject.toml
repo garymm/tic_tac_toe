@@ -1,0 +1,52 @@
+[project]
+name = "tic-tac-toe"
+version = "0.1.0"
+description = "A simple tic-tac-toe game."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pyright==1.1.392.post0",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.9.1",
+]
+
+[tool.uv]
+
+# restrict to platforms we care about so that version resolution is faster and more likely to succeed
+# (e.g. don't fail if a package isn't built for windows)
+environments = [
+    "sys_platform == 'darwin' and platform_machine == 'arm64'",
+    "sys_platform == 'linux' and platform_machine == 'aarch64'",
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",
+]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    # Please only ignore warnings that come from a transitive dependency that we
+    # can't easily avoid.
+    # See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#controlling-warnings
+    # action:message:category:module:line
+    "error",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "A",   # flake8-builtins
+    "B",   # flake8-bugbear
+    "E",   # pycodestyle
+    "F",   # Pyflakes
+    "I",   # isort
+    "PT",  # flake8-pytest-style
+    "SIM", # flake8-simplify
+    "UP",  # pyupgrade
+]
+
+[tool.pyright]
+typeCheckingMode = "standard"
